@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# IDE
+.idea/
+*.iml
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Env
+.env
+*.key
+*.pem

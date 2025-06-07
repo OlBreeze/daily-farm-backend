@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: 001-daily-farm
+
+  datasource:
+    url: jdbc:postgresql://dpg-d0no0o24d50c73effekg-a.oregon-postgres.render.com/dailyfarm_nfd1
+    username: admin
+    password: EyBkEhhPi6vbVbxld3P6uNRuBktCzaa5
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    #  show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+      #create-drop update
+
+  h2:
+    console:
+      enabled: false  # H2 отключён
+
+  output:
+    ansi:
+      enabled: always
+      
+server:
+ error:
+  include-stacktrace: never
+
+logging:
+ level:
+  root: INFO  # общий уровень
+  org:
+   springframework:
+    security: DEBUG
+     #web:
+      #FilterChainProxy: INFO
+      #DEBUG Для продакшена установить уровень логирования обратно на INFO или WARN
+  org.dailyfarm: DEBUG
+#TRACE	всё
+#DEBUG	отладки, debug, info, warn, error
+#INFO	только info, warn, error
+#WARN	warn, error
+#ERROR	только error
+
+#   hibernate:
+#    orm:
+#     jdbc:
+#      bind: trace
+
+security:
+ jwt:
+  secret: AYyCFjQxPXt0D97F3iVZeC90rTZqIZxWXiJeboZu8cgXQ4aTE8e0Rgtc7s77AzAM
+  expirationMinutes: 5
+  refreshExpirationDays: 7
