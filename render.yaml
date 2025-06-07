@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: daily-farm-backend
+    env: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/*.jar
+    healthCheckPath: /actuator/health

@@ -1,22 +1,25 @@
 spring:
   application:
-    name: 001-daily-farm
+    name: daily-farm-backend
 
   datasource:
-    url: jdbc:postgresql://dpg-d0no0o24d50c73effekg-a.oregon-postgres.render.com/dailyfarm_nfd1
-    username: admin
-    password: EyBkEhhPi6vbVbxld3P6uNRuBktCzaa5
+    url: ${DATABASE_URL:jdbc:postgresql://dpg-d0no0o24d50c73effekg-a.oregon-postgres.render.com/dailyfarm_nfd1}
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:EyBkEhhPi6vbVbxld3P6uNRuBktCzaa5}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     open-in-view: false
-    #  show-sql: true
+    # show-sql в продакшене отключаем
+    show-sql: ${SHOW_SQL:false}
     properties:
       hibernate:
         format_sql: true
+        # Для продакшена добавляем диалект
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
-      #create-drop update
+      ddl-auto: ${DDL_AUTO:validate}
+      #create-drop update validate - для продакшена
 
   h2:
     console:
@@ -26,20 +29,22 @@ spring:
     ansi:
       enabled: always
       
+# Порт из переменной окружения (важно для Render!)
 server:
- error:
-  include-stacktrace: never
+  port: ${PORT:8080}
+  error:
+    include-stacktrace: never
 
 logging:
- level:
-  root: INFO  # общий уровень
-  org:
-   springframework:
-    security: DEBUG
+  level:
+    root: ${LOG_LEVEL:INFO}
+    org:
+      springframework:
+        security: ${SECURITY_LOG:WARN}  # В продакшене DEBUG не нужен
+    org.dailyfarm: ${APP_LOG:INFO}
      #web:
       #FilterChainProxy: INFO
       #DEBUG Для продакшена установить уровень логирования обратно на INFO или WARN
-  org.dailyfarm: DEBUG
 #TRACE	всё
 #DEBUG	отладки, debug, info, warn, error
 #INFO	только info, warn, error
@@ -53,6 +58,39 @@ logging:
 
 security:
  jwt:
-  secret: AYyCFjQxPXt0D97F3iVZeC90rTZqIZxWXiJeboZu8cgXQ4aTE8e0Rgtc7s77AzAM
-  expirationMinutes: 5
-  refreshExpirationDays: 7
+  secret: ${JWT_SECRET:AYyCFjQxPXt0D97F3iVZeC90rTZqIZxWXiJeboZu8cgXQ4aTE8e0Rgtc7s77AzAM}
+  expirationMinutes: ${JWT_EXPIRATION:60}
+  refreshExpirationDays: ${REFRESH_EXPIRATION:7}
+---
+# Профиль для разработки
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  logging:
+    level:
+      org.springframework.security: DEBUG
+      org.dailyfarm: DEBUG
+
+---
+# Профиль для продакшена
+spring:
+  config:
+     activate:
+      on-profile: prod
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+
+  logging:
+    level:
+      root: WARN
+      org.dailyfarm: INFO
