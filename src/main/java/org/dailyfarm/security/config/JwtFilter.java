@@ -52,7 +52,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String accessToken = extractToken(request);
-        System.out.println("accessToken " +accessToken);
+       // System.out.println("accessToken " +accessToken);
         // Если токена нет - пускаем дальше
         if (accessToken == null) {
             filterChain.doFilter(request, response);
@@ -148,10 +148,8 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         log.info("path" + path);
         // Список публичных эндпоинтов, которые не требуют аутентификации, потом придумать
-        return path.startsWith("/login") || path.startsWith("/logout")||
-               path.startsWith("/account/register") || 
-               path.startsWith("/auth/check") || 
-               path.startsWith("/refresh") || 
+        return path.startsWith("/api/auth/**") || path.startsWith("/login")||path.startsWith("/logout")||
+               path.startsWith("/account/register") ||
                path.equals("/test1");
     }
     private boolean handleTokenRefresh(HttpServletRequest request, HttpServletResponse response) {

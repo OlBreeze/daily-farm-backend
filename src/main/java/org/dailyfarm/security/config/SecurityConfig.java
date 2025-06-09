@@ -58,8 +58,8 @@ public class SecurityConfig {
 				.authorizeHttpRequests(requests -> requests
 					    // Public (не требует авторизации)
 					    .requestMatchers("/h2-console/**", "/test/public" ).permitAll() // разрешить доступ к H2
-						.requestMatchers(HttpMethod.POST, "/login", "/logout", "/users").permitAll() // регистрация
-					    .requestMatchers("/login", "/account/register", "/auth/check", "/refresh").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/auth/**", "/users").permitAll() // регистрация
+					    .requestMatchers("/api/auth/**", "/account/register").permitAll()
 					    .requestMatchers(HttpMethod.GET, "/products", "/products/pages", "/products/id/{id}",
 					            "/products/name/{name}", "/units", "/units/{id}", "/categories", "/categories/{id}")
 					    .permitAll()

@@ -14,10 +14,10 @@ public interface ApiConstants {
 	String GET_ROLES_FOR_USER = "/roles/{login}";
 
 	// 🔹 Login
-	String LOGIN = "/login";
-	String LOGOUT = "/logout";
-	String REFRESH = "/refresh";
-	String AUTH_CHECK = "/auth/check";
+	String LOGIN = "/api/auth/login";
+	String LOGOUT = "/api/auth/logout";
+	String REFRESH = "/api/auth/refresh";
+	String AUTH_CHECK = "/api/auth/check";
 	
 	// 🔹 Products
 	String GET_ALL_PRODUCTS 	= "/products";
