@@ -15,8 +15,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        # Для продакшена добавляем диалект
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        # Для продакшена добавляем диалект, уже не добавляем
+        # dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: ${DDL_AUTO:validate}
   #create create-drop update validate - для продакшена
