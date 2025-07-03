@@ -3,9 +3,9 @@ spring:
     name: daily-farm-backend
 
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://dpg-d0no0o24d50c73effekg-a.oregon-postgres.render.com/dailyfarm_nfd1}
-    username: ${DB_USERNAME:admin}
-    password: ${DB_PASSWORD:EyBkEhhPi6vbVbxld3P6uNRuBktCzaa5}
+    url: ${DATABASE_URL:jdbc:postgresql://:dpg-d1ja7dali9vc739ink3g-a.oregon-postgres.render.com/dailyfarm_8csi}
+    username: ${DB_USERNAME:dailyfarm_8csi_user}
+    password: ${DB_PASSWORD:BYggZKr4lApq9QiVoDGlRehNeAmyi8aI}
     driver-class-name: org.postgresql.Driver
 
   jpa:
