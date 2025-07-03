@@ -1,11 +1,6 @@
 package org.dailyfarm.boot;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
+import lombok.RequiredArgsConstructor;
 import org.dailyfarm.products.entities.Category;
 import org.dailyfarm.products.entities.Unit;
 import org.dailyfarm.products.repo.CategoriesRepository;
@@ -19,7 +14,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import lombok.RequiredArgsConstructor;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -32,7 +30,7 @@ public class DBFiller implements ApplicationRunner {
 	private final PasswordEncoder passwordEncoder;
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	public void run(ApplicationArguments args) {
 
 		// Necessary part - filling
 		if (categoriesRepository.count() == 0) {
@@ -51,18 +49,21 @@ public class DBFiller implements ApplicationRunner {
 			unitRepository.save(unit1);
 			unitRepository.save(unit2);
 		}
-		// ----
-//		Product product = new Product(1, 2, 3, "Kg", 10.);
-//		availiableProductsRepo.save(product);
-		//System.out.println(productRepository.findAll());
+/*
+		Product product = new Product(1, 2, 3, "Kg", 10.);
+		availableProductsRepo.save(product);
+		System.out.println(productRepository.findAll());
+*/
 
-		
-		if (roleRepository.count() == 0) {
-//			Role user = new Role(UUID.randomUUID(), "USER");
-//		    Role admin = new Role(UUID.randomUUID(), "ADMIN");
-//		    Role manager = new Role(UUID.randomUUID(), "MANAGER");
 
-			Role user = new Role(); 		user.setName("USER");
+        if (roleRepository.count() == 0) {
+/*
+			Role user = new Role(UUID.randomUUID(), "USER");
+		    Role admin = new Role(UUID.randomUUID(), "ADMIN");
+		    Role manager = new Role(UUID.randomUUID(), "MANAGER");
+*/
+
+            Role user = new Role(); 		user.setName("USER");
 		    Role admin = new Role(); 	admin.setName("ADMIN");
 		    Role manager = new Role(); 	manager.setName("MANAGER");
 		    
